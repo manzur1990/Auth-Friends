@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
-
+import { AxiosWithAuth } from '../utils/AxiosWithAux';
 
 
 export const Login = () => {
@@ -13,12 +12,12 @@ export const Login = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        axios
+        AxiosWithAuth()
             .post('http://localhost:5000/api/login', credentials)
             .then(res => {
                 console.log("from Login",res);
                 localStorage.setItem('token', res.data.payload);
-                history.push('/friends');
+                history.push('/friends-list');
 
             })
             .catch(err => console.log(err.response));
